@@ -1,7 +1,7 @@
 #include<memory>
 #include<thread>
 #include<vector>
-#include<stack>
+#include<set>
 #include<map>
 
 #include"thread_wrapper.hpp"
@@ -18,5 +18,5 @@ public:
 private:
 	std::vector<std::unique_ptr<ThreadWrapper>> m_thread_pool;
 	std::map<uint64_t, uint64_t> m_lcm;
-	std::stack<uint64_t> m_numbers;
+	std::set<uint64_t> m_numbers;
 };

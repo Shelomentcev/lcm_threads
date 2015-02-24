@@ -1,6 +1,6 @@
 CC=g++
-CFLAGS=-c -Wall -pthread -std=c++11
-LDFLAGS=
+CFLAGS=-c -Wall -std=c++11
+LDFLAGS=-pthread
 SOURCES=main.cpp monitor.cpp thread_wrapper.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main

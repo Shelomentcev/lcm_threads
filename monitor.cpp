@@ -182,6 +182,8 @@ Monitor::~Monitor() {
 	uint64_t next;
 	do {
 		std::cin >> next;
+		
+		//std::cout << "Number: " << next << std::endl;
 
 		if (next == 0)
 			continue;
@@ -189,54 +191,29 @@ Monitor::~Monitor() {
 		//»щем свободный поток
 		auto &&free_thread = m_thread_pool.begin();
 		unsigned i = 0;
-		for (;!(*free_thread)->isFree(); free_thread = std::next(free_thread), i++);
+		for (;((free_thread != m_thread_pool.end()) && !(*free_thread)->isFree()); free_thread = std::next(free_thread), i++);
 
 		if (free_thread != m_thread_pool.end()){
-			std::cout << "T: " << i << " START\n";
 			(*free_thread)->start(next);
-		}
-		else {
-			m_numbers.push(next);
+		} else {
+			m_numbers.emplace(next);
 		}
 
 	} while (next != 0);
 
-	/*for (auto next : test){
-		if (next == 0)
-			continue;
-
-		//»щем свободный поток
-		auto &free_thread = m_thread_pool.begin();
-		unsigned i = 0;
-		for (; !(*free_thread)->isFree(); free_thread = std::next(free_thread), i++);
-
-		if (free_thread != m_thread_pool.end()){
-			std::cout << "T: " << i << " START\n";
-			(*free_thread)->start(next);
-		} else {
-			m_numbers.push(next);
-		}
-	}*/
-
-	//TODO: тут разбираем данные из стека.
-	while (!m_numbers.empty())
-	{
+	while(!m_numbers.empty()) {
 		auto &&free_thread = m_thread_pool.begin();
-		unsigned i = 0;
 
-		for (; !(*free_thread)->isFree(); free_thread = std::next(free_thread), i++); 
+		for (;((free_thread != m_thread_pool.end()) && !(*free_thread)->isFree()); free_thread = std::next(free_thread)); 
 		
 		if (free_thread != m_thread_pool.end())
 		{
-			std::cout << "T: " << i << " START from stack\n";
-			uint64_t next = m_numbers.top();
+			uint64_t next = *(m_numbers.begin());
 			(*free_thread)->start(next);
-			m_numbers.pop();
-		} else {
-			//∆дать?
+			m_numbers.erase(next);
 		}
-	}
 
+	}
 
 	bool all = true;
 	do
@@ -279,9 +256,13 @@ Monitor::~Monitor() {
 
 	uint64_t lcm = 1;
 
+	std::cout << "\tPrime number\tPow" << std::endl;
+
 	for (auto it : m_lcm) {
 		uint64_t prime_number = it.first;
 		uint64_t power = it.second;
+
+		std::cout << "\t" << prime_number << "\t\t" << power << std::endl;
 
 		lcm = lcm*(uint64_t)pow(prime_number, power);
 	}
