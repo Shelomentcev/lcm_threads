@@ -16,7 +16,7 @@ public:
 
 	void start(uint64_t a_number);
 
-	//число максимальная степень
+	//С‡РёСЃР»Рѕ РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ СЃС‚РµРїРµРЅСЊ
 	std::shared_ptr<std::map<uint64_t, uint64_t>> m_result;
 
 private:

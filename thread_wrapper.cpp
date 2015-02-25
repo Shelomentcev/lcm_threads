@@ -20,7 +20,6 @@ void ThreadWrapper::start(uint64_t a_number){
 }
 
 void ThreadWrapper::job(uint64_t a_number) {
-	//TODO: Прочитать про try catch и throw
 	if (a_number == 0)
 		throw "ThreadWrapper::job a_number = 0";
 	if (a_number > 10000)
@@ -31,7 +30,7 @@ void ThreadWrapper::job(uint64_t a_number) {
 
 	while (temp != 1)
 	{
-		//Поиск ещё одного простого множителя
+		//РџРѕРёСЃРє РµС‰С‘ РѕРґРЅРѕРіРѕ РїСЂРѕСЃС‚РѕРіРѕ РјРЅРѕР¶РёС‚РµР»СЏ
 		for (auto it = prime_numbers->begin(); it != prime_numbers->end() && (*it) <= temp; ++it)
 		{
 			bool contain_prime_number = (temp % (*it)) == 0;
@@ -60,10 +59,10 @@ void ThreadWrapper::job(uint64_t a_number) {
 
 		if ( merged != (*m_result).end()){
 			auto merged_pow = merged->second;
-			//Большое значение записываем.
+			//Р‘РѕР»СЊС€РѕРµ Р·РЅР°С‡РµРЅРёРµ Р·Р°РїРёСЃС‹РІР°РµРј.
 			(*m_result)[number] = (merged_pow < pow) ? pow : merged_pow;
 		} else {
-			//Добавляем новое число
+			//Р”РѕР±Р°РІР»СЏРµРј РЅРѕРІРѕРµ С‡РёСЃР»Рѕ
 			(*m_result)[number] = pow;
 		}
 	}
