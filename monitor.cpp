@@ -185,7 +185,7 @@ Monitor::~Monitor() {
 		
 		//std::cout << "Number: " << next << std::endl;
 
-		if (next == 0)
+		if ((next == 0) || next > 10000)
 			continue;
 
 		//Ищем свободный поток

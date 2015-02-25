@@ -20,10 +20,7 @@ void ThreadWrapper::start(uint64_t a_number){
 }
 
 void ThreadWrapper::job(uint64_t a_number) {
-	if (a_number == 0)
-		throw "ThreadWrapper::job a_number = 0";
-	if (a_number > 10000)
-		throw "ThreadWrapper::job a_number > 10000";
+	
 	std::shared_ptr<std::vector<uint64_t>> prime_numbers = Monitor::m_prime_numbers;
 	std::map<uint64_t, uint64_t> factorization_result;
 	uint64_t temp = a_number;
